@@ -461,6 +461,36 @@ if os.environ.get("TESTING"):
 # if True, only show original, don't perform any action on videos
 DO_NOT_TRANSCODE_VIDEO = False
 
+# Directory monitoring settings
+# List of directories to monitor for automatic media import
+# Example: ['/path/to/media/folder1', '/path/to/media/folder2']
+MEDIA_WATCH_DIRS = []
+
+# User account to assign auto-imported media to (username)
+# If not set or user doesn't exist, monitoring will be disabled
+MEDIA_WATCH_USER = ""
+
+# Time in seconds to wait after a file is created/modified before importing
+# This helps ensure the file has finished copying/writing
+MEDIA_WATCH_DEBOUNCE_SECONDS = 5
+
+# File extensions to monitor (empty list means all supported media types)
+# Example: ['.mp4', '.mkv', '.avi', '.mp3', '.jpg', '.png']
+MEDIA_WATCH_EXTENSIONS = []
+
+# Whether to monitor subdirectories recursively
+MEDIA_WATCH_RECURSIVE = True
+
+# Default state for auto-imported media ('public', 'private', 'unlisted')
+MEDIA_WATCH_DEFAULT_STATE = 'public'
+
+# Whether to move files after import (to avoid re-importing)
+# If True, files will be moved to MEDIA_WATCH_PROCESSED_DIR after import
+MEDIA_WATCH_MOVE_AFTER_IMPORT = False
+
+# Directory to move processed files to (only used if MEDIA_WATCH_MOVE_AFTER_IMPORT is True)
+MEDIA_WATCH_PROCESSED_DIR = ""
+
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 LANGUAGES = [
