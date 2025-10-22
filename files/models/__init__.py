@@ -1,4 +1,5 @@
 # Import all models for backward compatibility
+from .auto_import import MediaAutoImportRecord  # noqa: F401
 from .category import Category, Tag  # noqa: F401
 from .comment import Comment  # noqa: F401
 from .encoding import EncodeProfile, Encoding  # noqa: F401

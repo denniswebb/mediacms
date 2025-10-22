@@ -188,6 +188,11 @@ THUMBNAIL_UPLOAD_DIR = f"{MEDIA_UPLOAD_DIR}/thumbnails/"
 SUBTITLES_UPLOAD_DIR = f"{MEDIA_UPLOAD_DIR}/subtitles/"
 HLS_DIR = os.path.join(MEDIA_ROOT, "hls/")
 
+# Background folders that MediaCMS can watch to automatically import
+# media files. See the ``watch_media_directories`` management command for
+# details on the supported keys.
+MEDIA_AUTO_IMPORT_DIRECTORIES = []
+
 FFMPEG_COMMAND = "ffmpeg"  # this is the path
 FFPROBE_COMMAND = "ffprobe"  # this is the path
 MP4HLS = "mp4hls"

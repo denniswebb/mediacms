@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.search import SearchVectorField
 from django.core.files import File
-from django.db import models
+from django.db import DatabaseError, connection, models
 from django.db.models import Func, Value
 from django.db.models.signals import m2m_changed, post_delete, post_save, pre_delete
 from django.dispatch import receiver
@@ -363,7 +363,15 @@ class Media(models.Model):
 
         text = helpers.clean_query(text)
 
-        Media.objects.filter(id=self.id).update(search=Func(Value('simple'), Value(text), function='to_tsvector'))
+        if connection.vendor != "postgresql":
+            return True
+
+        try:
+            Media.objects.filter(id=self.id).update(
+                search=Func(Value('simple'), Value(text), function='to_tsvector')
+            )
+        except DatabaseError:
+            logger.debug("Skipping search vector update; unsupported database backend.", exc_info=True)
 
         return True
 
